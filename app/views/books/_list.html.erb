@@ -1,37 +1,48 @@
 <div class ="notice"><%= h(flash[:notice]) %></div>
-<div class="container">
-    <div class="row">
 
-<div class="col-lg-3" style="background-color: white;">
-<div class="profile-container">
-    <h2>Uesr Info</h2>
-    <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
-    
-    <h3 class="profile-name"><span class="name-introduction">name/</span>      <%= user.name %></h3>
-    <h3 class="profile-introduction"><span class="name-introduction">introduction/</span>  <%= user.introduction %></h3>
-    
-    <% if user.id == current_user.id %>
-        <p><%= link_to "プロフィール編集", edit_user_path(user), class: "pull-right" %></p>
-    <% else %>
-        <p><%= link_to "プロフィール編集", user_path(user), class: "pull-right" %></p>
-    <% end %>
-  </div>
+        <p id="notice"></p>
+
+
+ 
+              <div class="user">
+                <h2>User info</h2>
+                    <%= attachment_image_tag book.user, :profile_image, :fill, 200, 200, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+            <br><br><br><br><br><br>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>name</td>
+                                    <td><%= user.name %></td>
+                                </tr>
+                                <tr>
+                                    <td>introduction</td>
+                                    <td><%= user.introduction %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <% if user.id == current_user.id %>
+                        <p><%= link_to "プロフィール編集", edit_user_path(user), class: "pull-right" %></p>
+                    <% else %>
+                        <p><%= link_to "プロフィール編集", user_path(user), class: "pull-right" %></p>
+                    <% end %>
+              </div>
+
+
   
   
-  
-<h3>New book</h3>
-<!-- form_for部分 -->
-<%= form_for(@book) do |f| %>
-<h4>Title</h4>
-<%= f.text_field :title %>
+          <div class = "test2">
+                <h3>New book</h3>
+                <form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="eCILZel+0LsTDJa1vJAyWXKkGSYAt0G+GbYA1F+ArFS1+ys5jNaTkbdhAIwvuWS1lrDSPKNDGShXcbgz5djyuQ==" />
+                    <!-- form_for部分 -->
+                    <%= form_for(@book) do |f| %>
+                    <%= render 'error_messages', model: f.object %>
+                        <h4>Title</h4>
+                        <%= f.text_field :title %>
 
-<h4>Opinion</h4>
-<%= f.text_area :body %>
+                        <h4>Opinion</h4>
+                        <%= f.text_area :body %>
 
-<br><%= f.submit 'Create Book' %>
+                        <br><%= f.submit 'Create Book' %>
 
-<% end %>
-</div>
-</div>
-    </div>
-</div>
+                    <% end %>
+          </div>
