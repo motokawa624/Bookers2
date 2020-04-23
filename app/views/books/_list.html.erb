@@ -1,0 +1,37 @@
+<div class ="notice"><%= h(flash[:notice]) %></div>
+<div class="container">
+    <div class="row">
+
+<div class="col-lg-3" style="background-color: white;">
+<div class="profile-container">
+    <h2>Uesr Info</h2>
+    <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+    
+    <h3 class="profile-name"><span class="name-introduction">name/</span>      <%= user.name %></h3>
+    <h3 class="profile-introduction"><span class="name-introduction">introduction/</span>  <%= user.introduction %></h3>
+    
+    <% if user.id == current_user.id %>
+        <p><%= link_to "プロフィール編集", edit_user_path(user), class: "pull-right" %></p>
+    <% else %>
+        <p><%= link_to "プロフィール編集", user_path(user), class: "pull-right" %></p>
+    <% end %>
+  </div>
+  
+  
+  
+<h3>New book</h3>
+<!-- form_for部分 -->
+<%= form_for(@book) do |f| %>
+<h4>Title</h4>
+<%= f.text_field :title %>
+
+<h4>Opinion</h4>
+<%= f.text_area :body %>
+
+<br><%= f.submit 'Create Book' %>
+
+<% end %>
+</div>
+</div>
+    </div>
+</div>

@@ -1,15 +1,67 @@
 <!DOCTYPE html>
 <html>
+
   <head>
+
+
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav class='nav navbar-nav navbar-left' >
+      <span>Bookers</span>
+    </nav>
+ <nav>
+   <ul class="nav navbar-nav navbar-right">
+    <% if user_signed_in? %>
+      <li class="glyphicon glyphicon-home home">
+        <%= link_to "Home", user_path(current_user) %>
+      </li>
+      <li class="glyphicon glyphicon-user users">
+        <%= link_to "Users", users_path %>
+      </li>
+      <li class="glyphicon glyphicon-book books">
+        <%= link_to "Books", books_path %>
+      </li>
+      <li class="glyphicon glyphicon-log-out logout">
+        <%= link_to "logout", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li class="glyphicon glyphicon-home home">
+        <%= link_to "Home", root_path %>
+      </li>
+      <li class="glyphicon glyphicon-user about">
+        <%= link_to "About", homes_about_path %>
+      </li>
+      <li class="glyphicon glyphicon-user sign up">
+        <%= link_to "sign up", new_user_registration_path %>
+      </li>
+      <li class="glyphicon glyphicon-user login">
+        <%= link_to "login", new_user_session_path %>
+      </li>
+    <% end %>
+  </ul>
+  </nav>
+</div>
+</header>
+
+  
+  
+  
     <%= yield %>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
+<footer>
+  <p>CopyRight Infratop.inc</p>
+</footer>
 </html>

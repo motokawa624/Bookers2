@@ -1,0 +1,35 @@
+<%= render 'books/list', {book: @book, user: @user} %>
+<div class='col-xs-9'>
+<h1>Books</h1>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+     <tr>
+        <div class="block-content">
+            
+            <td><%= link_to user_path(book.user_id) do %>
+            <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %></td>
+            <% end %>
+            <h3 class="block-title">
+            <td><%= link_to book_path(book) do %>
+            <i class="fa fa-map-marker"></i><%= book.title %></td> 
+            <% end %>
+            </h3>
+            <h3 class="block-body">
+            <td><%= book.body %></td>     
+                  
+                  
+        </div
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

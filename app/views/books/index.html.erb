@@ -1,14 +1,51 @@
-<div class= "form">
-<h3>New book</h3>
-<!-- form_for部分 -->
-<%= form_for(@book) do |f| %>
-<h4>Title</h4>
-<%= f.text_field :title %>
+<section class="sct-color-1 slice">
+  <div class="container-fluid masonry-container">
+    <div class="row">
+        <%= render 'books/list', {book: @book, user: @user} %>
+      <div class="col-md-8 col-sm-offset-2">
+        <div class="masonry-wrapper-cols">
+          <div class="masonry-gutter"></div>
+          <h2>Book</h2>
+            <% @books.each do |book| %>
+            <div class="masonry-block">
+              <div class="block block-image v1">
+                <div class="block-image">
+                  <div class="view view-first">
+                  </div>
+                </div>
+                   
+                    <table>
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Title</th>
+                          <th>Opinion</th>
+                        </tr>
+                      </thead>
+                      
+                      <tbody>
+                        <tr>
+                          <div class="block-content">
+                           <td><%= link_to user_path(book.user_id) do %>
+                            <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %></td> 
+                            <% end %>
+                            <h3 class="block-title">
+                             <td><%= link_to book_path(book) do %>
+                              <i class="fa fa-map-marker"></i><%= book.title %></td> 
+                             <% end %>
+                            </h3>
+                            <h3 class="block-body">
+                             <td><%= book.body %></td>
+                        </tr>
+                      </tbody>
+                </div>
+              </div>
+            </div>
+          
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h4>Body</h4>
-<%= f.text_area :body %>
-
-<br><%= f.submit 'Create Book' %>
-
-<% end %>
-</div>

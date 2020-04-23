@@ -1,0 +1,38 @@
+<%= render 'books/list', {book: @book, user: @user} %>
+<div class ="notice"><%= h(flash[:notice]) %></div>
+
+<h1>Book detail</h1>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+             <div class="block-content">
+                <td><%= link_to user_path(@book.user_id) do %>
+                    <%= attachment_image_tag @book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+                    <br><%= @user.name %>
+                </td> 
+                    <% end %>
+              <h3 class="block-title">
+                <td>
+                    <i class="fa fa-map-marker"></i><%= @book.title %></td> 
+                    
+              </h3>
+                            <h3 class="block-body">
+                             <td><%= @book.body %></td>
+             </div>
+             <% if current_user.id == @book.user.id %>
+                 <td class ="center"><%= link_to 'Edit', edit_book_path %></td>
+                 <td><%= link_to 'Destroy', books_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+             <% end %>
+            </tr>
+        </tbody>
+    </table>

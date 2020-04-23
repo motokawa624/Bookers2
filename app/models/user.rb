@@ -5,10 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :name, presence: true
   validates :name,  length: { maximum: 20 }
+  validates :name,  length: { minimum: 2 }
+  validates :introduction,  length: { maximum: 50 }
   def email_required?
     false
   end
-
+attachment :profile_image
   def email_changed?
     false
   end
